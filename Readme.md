@@ -46,6 +46,6 @@ docker-compose up
 4. Add endpoint, to **DELETE** document or documents from MongoDB:  
 **DELETE** to `localhost:5050/dev/documents/:id` without id, to delete all documents, or delete document by id.
 
-5. Deploy API using Serverless Framework to your AWS Account. You can use Mongo Atlas for test Database.
+5. Deploy API using Serverless Framework to your AWS Account. You can use Mongo Atlas as test Database.
 
 P.S. Will be nice, if you add some Jest Unit Tests.
