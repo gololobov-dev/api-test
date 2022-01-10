@@ -34,16 +34,16 @@ docker-compose up
 ---
 
 ## Tasks
-1. Create endpoint, to save document or documents to MongoDB:
+1. Add endpoint, to **CREATE** document or documents to MongoDB:
 **POST** to `localhost:5050/dev/documents` array of documents
 
-2. Create endpoint, to get document or documents from MongoDB:
-**GET** to `localhost:5050/dev/documents/:id` array of documents or single document (by id)
+2. Add endpoint, to **READ** document or documents from MongoDB:
+**GET** to `localhost:5050/dev/documents/:id` get array of documents or single document (by id)
 
-3. Create endpoint, to update document in MongoDB:
+3. Add endpoint, to **UPDATE** document in MongoDB:
 **PUT** to `localhost:5050/dev/documents/:id` with document update
 
-4. Create endpoint, to delete document or documents from MongoDB:
+4. Add endpoint, to **DELETE** document or documents from MongoDB:
 **DELETE** to `localhost:5050/dev/documents/:id` without id, to delete all documents, or delete document by id.
 
 5. Deploy API using Serverless Framework to your AWS Account. You can use Mongo Atlas for test Database.
