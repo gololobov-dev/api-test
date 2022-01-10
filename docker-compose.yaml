@@ -1,0 +1,55 @@
+version: '3.9'
+services:
+    
+    # API
+    api-test-task:
+        container_name: api-test-task
+        build:
+            context: ./api
+            dockerfile: Dockerfile
+        image: api-test-task:1.0
+        ports:
+            - ${API_PORT}:6099
+        environment:
+            HOST: 0.0.0.0
+            API_STAGE: dev
+        volumes:
+            - ./api:/home/app
+            - ./api/.aws:/root/.aws
+            - /home/app/node_modules
+        working_dir: /home/app
+        command: serverless offline start
+        depends_on:
+            - mongo-api-test-db
+
+    # Mongo Database
+    mongo-api-test-db:
+        hostname: ${MONGO_HOST}
+        container_name: mongo-api-test-db
+        image: mongo:4.4.7
+        ports:
+            - ${MONGO_PORT}:27017
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+            MONGO_INITDB_DATABASE: ${MONGO_DBNAME}
+        volumes:
+            - ./mongo/db:/data/db
+
+    # Mongo Admin
+    mongo-admin-test:
+        container_name: mongo-admin-test
+        image: mrvautin/adminmongo
+        ports:
+            - ${MONGO_ADMIN_PORT}:3000
+        environment:
+            CONN_NAME: "Mongo"
+            HOST: "0.0.0.0"
+            PORT: "3000"
+            DB_USERNAME: ${MONGO_USER}
+            DB_PASSWORD: ${MONGO_PASSWORD}
+            DB_HOST: ${MONGO_HOST}
+            DB_PORT: ${MONGO_PORT}
+            DB_NAME: ${MONGO_DBNAME}
+        depends_on:
+            - mongo-api-test-db

@@ -1,0 +1,6 @@
+api/.serverless
+mongo/db
+node_modules
+package-lock.json
+/Icon?
+.DS_Store

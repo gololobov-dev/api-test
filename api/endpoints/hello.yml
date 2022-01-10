@@ -1,0 +1,8 @@
+hello:
+  name: hello-test
+  handler: src/functions/hello.hello
+  events:
+    - http:
+        path: hello
+        method: get
+        cors: true

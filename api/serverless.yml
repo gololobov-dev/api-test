@@ -1,0 +1,29 @@
+service: "api-test"
+useDotenv: true
+
+provider:
+  name: "aws"
+  runtime: "nodejs14.x"
+  memorySize: 128
+  timeout: 3
+  region: "us-east-1"
+  stage: "dev"
+  lambdaHashingVersion: 20201221
+  versionFunctions: false
+  apiGateway:
+    shouldStartNameWithService: true
+  httpApi:
+    cors: true
+  environment: 
+    NODE_ENV: "dev"
+
+functions:
+  - "${file(endpoints/hello.yml)}"
+
+plugins:
+  - "serverless-offline"
+
+custom:
+  serverless-offline:
+    httpPort: 6099
+    host: 0.0.0.0
